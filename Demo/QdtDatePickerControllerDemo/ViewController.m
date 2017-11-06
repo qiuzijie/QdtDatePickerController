@@ -10,21 +10,27 @@
 #import "QdtDatePickerController.h"
 
 @interface ViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (nonatomic, strong) NSDate *date;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIDatePicker;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    QdtDatePickerControllerDateType dateType = (QdtDateTypeDay|QdtDateTypeYear|QdtDateTypeMonth);
-    QdtDatePickerControllerViewModel *vm = [[QdtDatePickerControllerViewModel alloc] initWithDate:nil type:dateType];
+    QdtDatePickerControllerDateType dateType = (QdtDateTypeHour|QdtDateTypeDay|QdtDateTypeMinute|QdtDateTypeYear|QdtDateTypeMonth);
+    QdtDatePickerControllerViewModel *vm = [[QdtDatePickerControllerViewModel alloc] initWithDate:self.date type:dateType];
     QdtDatePickerController *datePicker = [[QdtDatePickerController alloc] initWithViewModel:vm selected:^(NSDate *date) {
-        NSLog(@"%@",date);
+        self.date = date;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSDateFormatter *formatter = [NSDateFormatter new];
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+            NSString *dateString = [formatter stringFromDate:date];
+            self.label.text = dateString;
+        });
     }];
     [self presentViewController:datePicker animated:YES completion:^{
         ;
