@@ -24,8 +24,10 @@ A more modes DatePicker than UIDatePicker
 通过一个`QdtDatePickerControllerViewModel`来配置`QdtDatePickerController`所需的基本数据，如果传nil则会显示当前时间以及默认样式。
 
 #### QdtDatePickerControllerViewModel
-用于决定选择器的样式以及默认时间
-`QdtDatePickerControllerDateType`：包含五种类型的位移枚举，自由组合。
+用于决定选择器的样式以及默认时间。
+
+#### QdtDatePickerControllerDateType
+包含五种类型的位移枚举，自由组合出选择器类型。
 
 #### 使用：
 ```
